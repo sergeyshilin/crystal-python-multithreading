@@ -85,4 +85,4 @@ class Crystal:
         self.join_particles()
 
         print ("Last crystal state: ",
-            zip([i + 1 for i in range(self.num_particles)], self.positions))
+            *zip([i + 1 for i in range(self.num_particles)], self.positions))
