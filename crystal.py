@@ -49,7 +49,7 @@ class Crystal:
 
     def print_current_state(self, window):
         for p in range(self.num_particles):
-            out_str = "[{0}] {1}*{2}".format(p + 1, "-" * self.positions[p], '-' * (self.size - 1 - self.positions[p]))
+            out_str = "[{0: <2}] {1}*{2}".format(p + 1, "-" * self.positions[p], '-' * (self.size - 1 - self.positions[p]))
             window.addstr(p, 0, out_str)
             
         window.refresh()
