@@ -2,11 +2,17 @@
 
 from __future__ import print_function
 
+import os
 import time
-import curses
 import threading
 
 from particle import Particle
+
+def is_unix():
+    return os.name != "nt"
+
+if is_unix():
+    import curses
 
 class Crystal:
 
@@ -59,7 +65,7 @@ class Crystal:
         self.start_particles()
 
         ## === INIT VISUALIZATION === ##
-        if visualise:
+        if is_unix() and visualise:
             window = curses.initscr()
             curses.noecho()
             curses.cbreak()
@@ -70,13 +76,13 @@ class Crystal:
                 if time.time() - start_time > self.time_limit:
                     self.stop_particles()
 
-            if visualise:
+            if is_unix() and visualise:
                 self.print_current_state(window)
 
             time.sleep(Crystal.visualization_delay / 1000.0)
 
         ## === STOP VISUALIZATION === ##
-        if visualise:
+        if is_unix() and visualise:
             curses.echo()
             curses.nocbreak()
             curses.endwin()
